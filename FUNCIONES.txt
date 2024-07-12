@@ -1,0 +1,46 @@
+SELECT * from producto order by precio DESC LIMIT 1;
+--
+SELECT * from producto order by precio ASC limit 1;
+--
+SELECT AVG(precio) from producto;
+--
+SELECT p.tipo_producto_idtipo_producto, AVG(p.precio) as promedio from producto p GROUP BY P.tipo_producto_idtipo_producto;
+--
+SELECT COUNT(1) from producto;
+--
+SELECT p.tipo_producto_idtipo_producto, COUNT(p.idProducto) from producto p GROUP BY p.tipo_producto_idtipo_producto;
+--
+SELECT c.nombre, COUNT(1) FROM cliente c GROUP by c.nombre;
+--
+SELECT p.tipo_producto_idtipo_producto, COUNT(1) FROM producto p;
+---
+SELECT p.tipo_producto_idtipo_producto, COUNT(1) as cantidad from producto p GROUP BY p.tipo_producto_idtipo_producto HAVING COUNT(1) > 2;
+--
+SELECT nombre_producto, avg(precio), avg(precio*stock) from producto GROUP by nombre_producto HAVING avg(precio*stock) * 800000;
+--
+SELECT sum(p.stock) from producto p;
+--
+SELECT max(p.stock) from producto p;
+--
+SELECT p.nombre_producto, max(p.stock) from producto p GROUP BY p.nombre_producto;
+--
+SELECT min(p.stock) from producto p;
+--
+SELECT pv.idproductos_venta, count(1) as "cantidad_producto2", sum(pv.cantidad) from productos_venta pv GROUP by pv.idproductos_venta;
+--
+SELECT c.nombre from cliente c;
+--
+SELECT UPPER(c.nombre) from cliente c;
+--
+SELECT LOWER(c.nombre) from cliente c;
+--
+SELECT LENGTH(c.nombre) from cliente c;
+--
+SELECT LENGTH(c.nombre) c.nombre from cliente c;
+--
+SELECT substring(c.nombre, 2, 3) c.nombre from cliente c;
+--
+SELECT DISTINCT pv.Producto_idProducto from productos_venta pv;
+--
+SELECT DISTINCT pv.Producto_idProducto, pv.cantidad from productos_venta pv;
+--

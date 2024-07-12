@@ -1,0 +1,35 @@
+Select t.*,c.*
+from cliente c,telefonos t;
+--
+Select t.*,c.*
+from cliente c,telefonos t
+WHERE T.cliente_idcliente = c .Idcliente;
+---
+
+Select t.*,c.*
+from cliente c INNER JOIN telefonos t on
+ T.cliente_idcliente = c .Idcliente;
+---
+Select t.*,c.*
+from cliente c LEGTH JOIN telefonos t on
+ T.cliente_idcliente = c .Idcliente;
+---
+SELECT c.*, t.* , COUNT(t.idTelefonos) as "cantidaddetelefonos"
+from cliente c LEFT JOIN telefonos t on  t.cliente_idcliente = c.idcliente
+group by c.idcliente
+
+---
+SELECT c.*, t.* , COUNT(t.idTelefonos) as "cantidaddetelefonos"
+from cliente c RIGHT JOIN telefonos t on  t.cliente_idcliente = c.idcliente
+group by c.idcliente
+;---
+SELECT c.*, t.* 
+from cliente c RIGHT JOIN telefonos t on  t.cliente_idcliente = c.idcliente
+UNION 
+SELECT c.*, t.* 
+from cliente c LEFT JOIN telefonos t on  t.cliente_idcliente = c.idcliente
+;
+--
+SELECT pv.idproductos_venta , pv.cantidad,p.nombre_producto,p.precio,pv.cantidad *p.precio as "totalproducto"
+from productos_venta pv INNER JOIN producto p ON pv.Producto_idProducto = p.idProducto
+;

@@ -1,0 +1,5 @@
+SHOW index FROM cliente;
+EXPLAIN SELECT* FROM cliente;
+EXPLAIN SELECT* FROM cliente WHERE idcliente in(1,2);
+EXPLAIN SELECT* FROM cliente FORCE INDEX (PRIMARY) WHERE idcliente in(1,2);
+EXPLAIN SELECT * FROM cliente FORCE INDEX (fk_cliente_ubicacion1_idx) WHERE idcliente IN (1,2);

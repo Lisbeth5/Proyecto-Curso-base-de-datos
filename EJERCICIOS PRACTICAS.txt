@@ -1,0 +1,37 @@
+Seleccionar los nombres de tipos de producto.
+
+select tp.nombre_tipo
+from tipo_producto tp;
+
+Cantidad de telefonos que tiene cada cliente.
+
+select t.cliente_idcliente, COUNT(t.idTelefonos) as "cantidad_telefonos"
+from telefonos t
+GROUP by t.cliente_idcliente;
+
+Cuales productos ofrece el proveedor 1.
+
+SELECT p.idProducto,p.nombre_producto
+from producto p
+WHERE p.proveedor_idproveedor = 1;
+
+Cantidad de los productos cuyo nombre contenga pc.
+SELECT p.nombre_producto ,COUNT(1)
+from producto p
+WHERE p.nombre_producto LIKE "%pc%"
+GROUP by p.nombre_producto
+;
+
+Escribir el codigo de creacion de una tabla.
+create table tablaEjercicio(
+    id_tabla int not null,
+    nombre varchar(45),
+    PRIMARY KEY (id_tabla)
+);
+
+Escribir como se realizarian inserciones en dicha tabla.
+
+INSERT INTO TablaEjercicio VALUES (1,"insercion")
+
+Escribir la sentencia alter para agregrar una nueva columna.
+ALTER TABLE TablaEjercicio add COLUMN (colPrueba varchar(20))

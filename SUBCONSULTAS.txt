@@ -1,0 +1,48 @@
+SELECT p.*
+FROM producto p
+WHERE p.precio =(SELECT MAX(precio) FROM producto );
+--
+Select C.*
+FROM cliente c
+Where c.idcliente in (SELECT t.cliente_idcliente from telefonos t)
+
+---
+Select C.*
+FROM cliente c
+Where c.idcliente in (SELECT v.cliente_idcliente from venta v )
+
+---
+SELECT c.*
+FROM cliente c
+WHERE c.idcliente IN (
+    SELECT v.cliente_idcliente
+    FROM venta v
+    INNER JOIN productos_venta pv ON pv.venta_idventa = v.idventa
+    WHERE pv.Producto_idProducto IN (
+        SELECT p.idproducto
+        FROM producto p
+        WHERE p.nombre_producto LIKE "%pc%"
+    )
+);
+---
+
+SELECT *
+FROM cliente c , (SELECT t.cliente_idcliente ,COUNT(1) as "cantidad_tels" from telefonos t GROUP by t.cliente_idcliente) t2
+WHERE c.idcliente = t2.cliente_idcliente
+
+---
+SELECT c.*
+FROM cliente c
+JOIN (
+    SELECT t.cliente_idcliente, COUNT(1) AS cantidad
+    FROM telefonos t
+    GROUP BY t.cliente_idcliente
+) t2 ON c.idcliente = t2.cliente_idcliente
+WHERE t2.cantidad = (
+    SELECT MAX(t2_inner.cantidad)
+    FROM (
+        SELECT COUNT(1) AS cantidad
+        FROM telefonos t_inner
+        GROUP BY t_inner.cliente_idcliente
+    ) t2_inner
+);        

@@ -1,0 +1,60 @@
+elect p.nombre_producto, p.precio, p.precio*2 as “promocion1”, p.precio/2 as promocion1, p.precio+10 as “promocion numero 3” from producto p where p.precio > 25000;
+
+---
+select p.nombre_producto, p.precio, p.precio*2 as “promocion1”, p.precio/2 as promocion1, p.precio+10 as “promocion numero 3” from producto p where p.precio < 25000;
+---
+select p.nombre_producto, p.precio, p.precio*2 as “promocion1”, p.precio/2 as promocion1, p.precio+10 as “promocion numero 3” from producto p where promocion1 < 25000;
+---
+select p.nombre_producto, p.precio, p.precio*2 as “promocion1”, p.precio/2 as promocion1, p.precio+10 as “promocion numero 3” from producto p where p.precio/2 < 25000;
+--
+select p.nombre_producto, p.precio, p.precio*2 as “promocion1”, p.precio/2 as promocion1, p.precio+10 as “promocion numero 3” from producto p where p.precio > 11700;
+---
+SELECT p.nombre_producto, p.precio, p.precio*2 as “promocion1”, p.precio/2 as promocion1, p.precio+10 as “promocionnumero3” from producto p where p.precio > 11700 and p.nombre_producto like "comedor%";
+--
+SELECT p.nombre_producto, p.precio, p.precio*2 as “promocion1”, p.precio/2 as promocion1, p.precio+10 as “promocionnumero3” from producto p where p.precio > 11700 and p.nombre_producto like "comedor%"
+or p.nombre_producto like "%1";
+---
+SELECT p.nombre_producto, p.precio, p.precio*2 as “promocion1”, p.precio/2 as promocion1, p.precio+10 as “promocionnumero3” from producto p where p.precio > 11700 and (p.nombre_producto like "comedor%"
+and p.nombre_producto like "%1");
+
+----
+SELECT p.idProducto,p.nombre_producto, p.precio, p.precio*2 as “promocion1”, p.precio/2 as promocion1, p.precio+10 as “promocionnumero3”,p.stock from producto p where p.stock<10;
+---
+SELECT p.idProducto,p.nombre_producto, p.precio, p.precio*2 as “promocion1”, p.precio/2 as promocion1, p.precio+10 as “promocionnumero3”,p.stock from producto p where p.stock BETWEEN 2 and 5;
+--
+SELECT p.idProducto,p.nombre_producto, p.precio, p.precio*2 as “promocion1”, p.precio/2 as promocion2, p.precio+10 as “promocionnumero3”,p.stock from producto p where p.stock >=2
+and p.stock <= 5 ;
+----
+SELECT * from venta v where v.fecha_venta >"2014-11-01";
+--
+SELECT p.nombre_producto, p.precio, p.precio*2 as “promocion1”, p.precio/2 as promocion1, p.precio+10 as “promocionnumero3” from producto p where p.precio > 11700 and p.nombre_producto like "comedor%"
+and p.nombre_producto like "%1";
+---
+SELECT c.RUT ,c.nombre,c.ubicacion_idubicacion
+from cliente c
+where c.nombre =  "maria";
+--
+SELECT c.RUT ,c.nombre,c.ubicacion_idubicacion
+from cliente c
+where c.nombre like  "maria";
+--
+SELECT c.RUT ,c.nombre,c.ubicacion_idubicacion
+from cliente c
+where c.ubicacion_idubicacion > 4;
+--
+SELECT c.RUT ,c.nombre,c.ubicacion_idubicacion
+from cliente c
+where c.ubicacion_idubicacion IN (4,1);
+--
+SELECT c.RUT ,c.nombre,c.ubicacion_idubicacion
+from cliente c
+where c.nombre IN ("Flor","Maria");
+--
+SELECT c.RUT ,c.nombre,c.ubicacion_idubicacion
+from cliente c
+where c.nombre BETWEEN "f" AND "z";
+--
+SELECT c.RUT ,c.nombre,c.ubicacion_idubicacion
+from cliente c
+limit 3;
+---

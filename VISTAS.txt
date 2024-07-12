@@ -1,0 +1,67 @@
+
+create or REPLACE VIEW vistaCliente1
+AS 
+SELECT c.id.cliente, c.RUT ,c.nombre
+from cliente.c
+WHERE c.ubicacion_idubicacion =1;
+
+Select * from vistaCliente1;
+
+--
+SELECT p.idproducto, p.nombre_producto, pv.venta_idventa
+FROM producto p
+INNER JOIN productos_venta pv ON p.idproducto = pv.Producto_idProducto;
+
+--
+SELECT p.idproducto, p.nombre_producto, sum(pv.venta_idventa)
+FROM producto p
+INNER JOIN productos_venta pv ON p.idproducto = pv.Producto_idProducto
+GROUP BY p.idProducto,p.nombre_producto;
+
+---
+SELECT p.idproducto, p.nombre_producto, SUM(pv.cantidad) as "ventas productos",COUNT(pv.venta_idventa) as "cantidad"
+FROM producto p
+INNER JOIN productos_venta pv ON p.idproducto = pv.Producto_idProducto
+GROUP BY p.idProducto,p.nombre_producto;
+--
+SELECT p.idproducto, p.nombre_producto, p.precio ,SUM(pv.cantidad) as "ventas productos",COUNT(pv.venta_idventa) as "cantidad"
+FROM producto p
+INNER JOIN productos_venta pv ON p.idproducto = pv.Producto_idProducto
+GROUP BY p.idProducto,p.nombre_producto ,p.precio;
+--
+SELECT prods.*
+FROM
+(
+SELECT p.idproducto, p.nombre_producto, p.precio ,SUM(pv.cantidad) as "ventas productos",COUNT(pv.venta_idventa) as "cantidad"
+FROM producto p
+INNER JOIN productos_venta pv ON p.idproducto = pv.Producto_idProducto
+GROUP BY p.idProducto,p.nombre_producto ,p.precio)
+prods
+---
+CREATE VIEW productos_mas_vendidos AS
+SELECT prods.*
+FROM
+(
+SELECT p.idproducto, p.nombre_producto, p.precio, SUM(pv.cantidad) AS ventas_productos, COUNT(pv.venta_idventa) AS cantidad
+FROM producto p
+ INNER JOIN productos_venta pv ON p.idproducto = pv.Producto_idProducto
+ GROUP BY p.idproducto, p.nombre_producto, p.precio
+) prods
+WHERE prods.ventas_productos > 10;
+--
+SELECT c.idcliente ,c.RUT ,c.nombre,t.idTelefonos 
+FROM cliente c LEFT JOIN telefonos t on t.cliente_idcliente = c.idcliente 
+--
+SELECT c.idcliente ,c.RUT ,c.nombre,COUNT(t.idTelefonos)
+FROM cliente c LEFT JOIN telefonos t on t.cliente_idcliente = c.idcliente 
+GROUP BY c.idcliente ,c.RUT,c.nombre
+--
+SELECT c.idcliente ,c.RUT ,c.nombre,IFNULL(COUNT(t.idTelefonos),0)
+FROM cliente c LEFT JOIN telefonos t on t.cliente_idcliente = c.idcliente 
+GROUP BY c.idcliente ,c.RUT,c.nombre
+---
+CREATE VIEW infcliente 
+AS
+SELECT c.idcliente ,c.RUT ,c.nombre,IFNULL(COUNT(t.idTelefonos),0) as "cantidadTelefonos"
+FROM cliente c LEFT JOIN telefonos t on t.cliente_idcliente = c.idcliente 
+GROUP BY c.idcliente ,c.RUT,c.nombre
